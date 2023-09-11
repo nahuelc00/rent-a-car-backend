@@ -7,14 +7,14 @@ class CarController {
   }
 
   setupRoutes(app) {
-    app.get('/', async (req, res) => {
+    app.get('/cars', async (req, res) => {
       const cars = await this.carService.getCars();
       const carsMapped = cars.map((car) => mapCar(car));
       res.statusCode = 200;
       res.send(carsMapped);
     });
 
-    app.get('/car/:id', async (req, res) => {
+    app.get('/cars/:id', async (req, res) => {
       const carId = Number(req.params.id);
       const car = await this.carService.getCar(carId);
       const carMapped = mapCar(car);
@@ -48,7 +48,7 @@ class CarController {
       res.send(carMapped);
     });
 
-    app.delete('/car/:id', async (req, res) => {
+    app.delete('/cars/:id', async (req, res) => {
       const carId = Number(req.params.id);
       const carDeleted = await this.carService.deleteCar(carId);
       const carMapped = mapCar(carDeleted);
